@@ -1,0 +1,151 @@
+W0      @SCRATCH
+W0L     _RETURN_
+W0 -W1  @DIVFF.P1
+W0 -W1  @FLT.P2
+W0 -W1  @READ_ROM_MEMORY.P3
+W0 -W2  @FLT48.P4
+W0 -W1  @SFTOI.P5
+W0 -W1  @DIV3232B.P6
+W0      @ITOF.P7
+W0 -W1  @MULFF.P8
+W0 -W3  @I64TOF64.P9
+W0 -W2  @MULFF48.P10
+W0 -W1  @ADDFF.P11
+W0 -W3  @DIVFF64.P12
+W0 -W3  @F64TOSI64.P13
+W0 -W3  @SI64TOF64.P14
+W0 -W3  @SI64TOF48.P15
+W0 -W3  @MULFF64.P16
+W0 -W2  @F48TO64.P17
+W0 -W3  @FLT64.P18
+W0 -W2  @F48TOSI64.P19
+W0 -W3  @I64TOF48.P20
+W0      @SITOF.P21
+W0 -W1  @MULS3232.P22
+W0      @delay_ms1.P23
+W0 -W2  @ADDFF48.P24
+W0 -W3  @ADDFF64.P25
+W0 -W3  @F64TOI64.P26
+W0      @delay_us1.P27
+W0 -W2  @DIVFF48.P28
+W1      @SCRATCH
+W1      @READ_PACKED_MEMORY.P1
+W1      @WRITE_PACKED_MEMORY.P2
+W2 -W3  @MULFF.P1
+W2 -W3  @DIVFF.P2
+W2 -W3  @FLT.P3
+W2 -W3  @MULS3232.P4
+W2      @READ_ROM_MEMORY.P5
+W2 -W3  @DIV3232B.P6
+W2      @READ_PACKED_MEMORY.P7
+W2      @WRITE_PACKED_MEMORY.P8
+W2 -W3  @ADDFF.P9
+W3 -W5  @MULFF48.P1
+W3      @READ_PACKED_MEMORY.P2
+W3 -W5  @ADDFF48.P3
+W3 -W5  @DIVFF48.P4
+W3 -W5  @FLT48.P5
+W3      @WRITE_PACKED_MEMORY.P6
+W3      @READ_ROM_MEMORY.P7
+W4 -W7  @MULFF64.P1
+W4 -W7  @DIVFF64.P2
+W4 -W7  @FLT64.P3
+W4 -W7  @ADDFF64.P4
+800-827 pas_64
+828-84F qas_64
+850-87F pat_64
+880-8AF qat_64
+8B0-8B5 duty
+8B6-8B7 sample
+8B8-8F3 sine_table
+8F4-8F5 sine_index
+8F6-8FB phase_angle
+8FC-903 theeta
+904-90F reference
+910.0   tick
+910.1   tick_count
+912-913 peak_voltage
+914-B07 timer_table
+B08-D07 gain_table
+D08-D09 raw_adc
+D0A-D0B throttle_level
+D0C-D0D freq
+D0E-D0F temp
+D10-D17 timer_reload.intr_per_sample
+D10-D11 voltage_gain.i
+D12-D13 voltage_gain.i
+D14-D15 voltage_gain.i
+D14-D1B sin.x
+D18-D19 timer_reload.sample
+D24-D2B cos.x
+D2C     cos.quad
+D2D     cos.i
+D2E-D35 cos.y
+D36-D3D cos.t
+D3E-D45 cos.t2
+D46-D4D cos.frac
+D4E-D95 cos.p_64
+DD6-DD7 timer1_isr.i
+F80-FFF _STACK_
+
+ROM Allocation:
+000200  RDA_isr
+000220  TBE_isr
+000240  UART1E_isr
+000260  EXT0_isr
+000280  PWM1_isr
+0002B2  @MULS3232
+0002F4  timer1_isr
+000508  @SI64TOF64
+000572  @DIVFF64
+00067A  @MULFF64
+00078A  @F64TOI64
+0007E8  timer_reload
+0008B8  @ADDFF64
+000AA6  voltage_gain
+000B6E  @I64TOF64
+000BD8  @FLT64
+000C5C  cos
+000F04  sin
+000F40  @F64TOSI64
+000F9E  fill_sine_table
+001066  initMCPWM
+0010BE  @cinit1
+0010BE  MAIN
+0010E4  @cinit2
+
+Project Directory:
+    C:\Users\eelab\Documents\motor_controller\
+
+Project Files:
+    20242422 1721 dspic202_timer1.c                         [23-Apr-24 10:05  CRC=0AFCE312]
+    ..\..\..\..\Program Files (x86)\PICC\Devices\33FJ32MC202.h [21-Oct-22 11:12  CRC=D42B45C9]
+    ..\..\..\..\Program Files (x86)\PICC\Drivers\math.h     [05-May-20 13:57  CRC=02232397]
+
+Source signature=E36E7009
+Program memory checksum=0000
+Hex file CRC=E40C
+
+Units:
+    C:\Users\eelab\Documents\motor_controller\20242422 1721 dspic202_timer1 (main)
+
+Compiler Settings:
+    Processor:      DSPIC33FJ32MC202
+    Pointer Size:   16
+    ADC Range:      0-4095
+    Opt Level:      9
+    Short,Int,Long: SIGNED: 8,16,32
+    Float,Double:   32,64
+    Compile Mode:   CCS5
+
+Output Files:
+    XREF file:   20242422 1721 dspic202_timer1.xsym
+    Errors:      20242422 1721 dspic202_timer1.err
+    Ext Symbols: 20242422 1721 dspic202_timer1.esym
+    INHX8:       20242422 1721 dspic202_timer1.hex
+    Symbols:     20242422 1721 dspic202_timer1.sym
+    List:        20242422 1721 dspic202_timer1.lst
+    Debug/COFF:  20242422 1721 dspic202_timer1.cof
+    Project:     20242422 1721 dspic202_timer1.ccspjt
+    Call Tree:   20242422 1721 dspic202_timer1.tre
+    Statistics:  20242422 1721 dspic202_timer1.STA

@@ -1,0 +1,334 @@
+//!#include <pwm_3.h>
+#include <33FJ32MC202.h>
+
+//#fuses PR,HS,NOWDT
+#fuses PR_PLL,HS,NOWDT 
+#device ADC=12
+#use delay(clock=40MHz)
+//!#include <serial.h>
+#include <math.h>
+#define P1TCON 0x01C0
+#define P1TMR 0x01C2
+#define P1TPER 0x01C4
+#define P1SECMP 0x01C6
+#define PWM1CON1 0x01C8 
+#define PWM1CON2 0x01CA
+#define P1DTCON1 0x01CC
+#define P1DTCON2 0x01CE
+#define P1FLTACON 0x01D0
+#define P1OVDCON 0x01D4 
+#define P1DC1 0x01D6 
+#define P1DC2 0x01D8
+#define P1DC3 0x01DA
+#define IPC14 0x00C0
+#define CLKDIV 0x0744
+#define PLLFBD 0x0746
+
+
+#define Tick_Out PIN_B0
+#define TOGGLE_PIN PIN_B1
+//!#define ADC_TIME_CHECK PIN_B1
+#define Sync_Out PIN_A4
+#define Shut_Down PIN_A1
+#define Div_pin PIN_B2
+
+#define voltage_offset 624//1248
+#define low_duty_limit 32
+#define high_duty_limit 1217
+#define SLOPE 2.7
+
+#define break_level 5
+#define sustain_level 200
+#define break_amplitude 0
+#define pedestal_amplitude 10
+#define peak_amplitude 550
+
+#define throttle_PIN PIN_B1
+
+#define Voltage_Current_PIN   PIN_B11
+
+#use    fast_io(a)
+#use    fast_io(b)
+
+const unsigned max_samples=30.0;
+unsigned int16 duty[3]={0,0,0},sample=0;
+signed int16 sine_table[max_samples];
+unsigned int16 sine_index,phase_angle[3] = {0 , 0 , 0};
+double theeta;
+signed int32 reference[3] = {0,0,0};
+
+int1 tick=0;
+signed int16 peak_voltage =0;//  1184; 
+const unsigned max_freq = 250; //Hz
+const double per_clock_tick = 0.006405; //ms
+unsigned int16 timer_table[max_freq];
+unsigned int16 gain_table[256];
+unsigned int16 raw_adc =0 ;
+signed int16 throttle_level = 0;
+unsigned int16 freq = 1;
+unsigned int16 temp = 0;
+
+int1 tick_count = 0;
+
+void timer_reload(void);
+void voltage_gain(void);
+
+#int_RDA
+void  RDA_isr(void) 
+{
+//!     if(U1STA.URXDA == 1)
+//!     {
+//!       //   IFS0.U1RXIF = 0; // Clear RX Interrupt flag
+//!          rx_data = U1RXREG;
+//!          U1TXREG=rx_data;
+//!          startup_gain=rx_data;
+//!     }        
+}
+#int_TBE
+void  TBE_isr(void) 
+{
+   //IFS0.U1TXIF = 0; // Clear TX Interrupt flag
+   //U1TXREG = 'a'; // Transmit one character  
+}
+#int_UART1E
+void  UART1E_isr(void) 
+{
+   /* Must clear the overrun error to keep UART receiving */
+  // if(U1STA.OERR == 1)
+   {
+     // U1STA.OERR = 0;
+   }
+}
+
+#int_EXT0
+void  EXT0_isr(void) 
+{
+}
+#int_PWM1
+void  PWM1_isr(void) 
+{
+   tick_count++;
+   
+   // 1 ms throttle
+   if(tick_count < 8)
+   {
+      output_bit(throttle_PIN,1);
+   }
+   else
+   {
+      output_bit(throttle_PIN,0);
+   }
+   
+
+}
+#INT_TIMER1
+void  timer1_isr(void) 
+{
+
+//!   output_toggle(TOGGLE_PIN);
+   output_bit(Tick_Out,1);
+//!   set_adc_channel(5);
+   sample = (sample+1)%max_samples;
+   phase_angle[0] = sample;
+   phase_angle[1] = (sample+10)%max_samples;
+   phase_angle[2] = (sample+20)%max_samples;
+
+   for (int i = 0 ; i < 3 ; i++) {
+      
+      reference[i] = sine_table[phase_angle[i]];
+      reference[i] = reference[i] * peak_voltage;
+      if( reference[i] > 0)
+      {
+         reference[i] = reference[i] >> 8; 
+      }
+      else if( reference[i] < 0)
+      {
+         reference[i] = 0 - reference[i];
+         reference[i] = reference[i] >> 8;
+         reference[i] = 0 - reference[i];
+      }
+      
+      reference[i] = reference[i] + voltage_offset;
+      if(reference[i] > high_duty_limit )
+      { 
+         reference[i] = high_duty_limit;
+      }
+      if(reference[i] < low_duty_limit)
+      { 
+         reference[i] = low_duty_limit;
+      }
+   }
+      
+//!   
+//!    duty[0] = reference;
+//!    duty[1] = reference;
+   *P1DC1 = reference[0];  *(P1DC1+1) = reference[0]>>8;
+   *P1DC2 = reference[1];  *(P1DC2+1) = reference[1]>>8;
+   *P1DC3 = reference[2];  *(P1DC3+1) = reference[2]>>8;
+  
+   if(sample < 15)
+   {
+      output_bit(Sync_Out,1);
+   }
+   else
+   {
+      output_bit(Sync_Out,0);
+   }
+   if(sample == 0)
+   {
+      tick=1;
+   }
+   output_bit(Tick_Out,0);
+}
+void initMCPWM(void);
+void fill_sine_table(void);
+void main()
+{  
+   timer_reload();
+   voltage_gain();
+   fill_sine_table();
+   throttle_level = 0;
+   freq = 1;
+
+   
+   
+
+   
+//!      U1MODE.STSEL = 0; // 1-Stop bit
+//!   U1MODE.PDSEL = 0; // No Parity, 8-Data bits
+//!   U1MODE.ABAUD = 0; // Auto-Baud disabled
+//!   U1MODE.BRGH = 0; // Standard-Speed mode
+//!   U1BRG = BRGVAL; // Baud Rate setting for 9600
+//!   U1STA.UTXISEL0 = 0; // Interrupt after one TX character is transmitted
+//!   U1STA.UTXISEL1 = 0;
+//!   IEC0.U1TXIE = 1; // Enable UART TX interrupt
+//!   IEC0.U1RXIE = 1; // Enable UART RX interrupt
+//!   U1STA.URXISEL = 0; // Interrupt after one RX character is received;
+//!   U1MODE.UARTEN = 1; // Enable UART
+//!   U1STA.UTXEN = 1; // Enable UART TX
+   /* Wait at least 105 microseconds (1/9600) before sending first char */
+   delay_us(105);
+//!   RPINR18.U1RXR=11;
+//!   RPOR5=0x0003;
+   set_tris_b(0b1111110011111111);
+//!   output_bit(UART_GND,0);
+//!   output_bit(UART_VCC,1);
+
+   
+   output_bit(Tick_Out,0);
+   output_bit(TOGGLE_PIN , 0);
+   output_bit(throttle_PIN , 0);
+ //  output_bit(Shut_Down,1);
+ //  enable_interrupts(INT_PWM1);
+ //  enable_interrupts(INT_EXT0);
+
+
+   
+   
+   *(CLKDIV+1)=0x00;  *CLKDIV=0b01000011; //PLLPOST=4 PLLPRE=5 total divider=20
+   *(PLLFBD+1)=0x00;  *PLLFBD=0b00100110; //PLLDIV=40 //
+
+   initMCPWM();
+   set_tris_a(0x0001);
+   set_tris_b(0x0FFD);
+   set_tris_b(0b1111110011111111);
+//!   output_bit(UART_GND,0);
+//!   output_bit(UART_VCC,1);
+  
+   output_drive(Tick_Out);
+   output_drive(TOGGLE_PIN);
+   output_drive(Sync_Out);
+   output_drive(Shut_Down);
+   output_drive(throttle_PIN);
+   
+//!   setup_adc(ADC_CLOCK_INTERNAL);
+   setup_adc(ADC_CLOCK_DIV_32);
+   setup_adc_ports(sAN5);
+   
+   set_adc_channel(5);
+   delay_us(10);
+   setup_timer1(TMR_INTERNAL | TMR_DIV_BY_64 , timer_table[freq]);
+   enable_interrupts(INT_TIMER1);
+   enable_interrupts(INTR_GLOBAL);
+   
+   while(TRUE)
+   { 
+ //     if(tick)
+      {
+ //        tick=0;
+         raw_adc = read_adc();
+         raw_adc = raw_adc >> 2;
+         throttle_level = raw_adc;  
+         if (throttle_level > 255)
+         {
+            throttle_level = 255;
+         }
+         if (throttle_level < 0)
+         {
+            throttle_level = 0;
+         }
+         freq = throttle_level - 5 ;
+         peak_voltage = gain_table[throttle_level];
+         setup_timer1(TMR_INTERNAL | TMR_DIV_BY_64 , timer_table[freq]); 
+         //putc(1,49);
+      }   
+   }
+}
+void initMCPWM(void)
+{   
+   *(P1TCON+1)=0x80;  *P1TCON=0x02;
+ //  *(P1TMR+1)=0x00;  *P1TMR=0x78;
+   *(P1TPER+1)=0x02;  *P1TPER=0x70;  
+//!   *(P1TPER+1)=0x00;  *P1TPER=0xFA;
+   *(P1SECMP+1)=0x00;  *P1SECMP=0x01; //
+   *(PWM1CON1+1)=0x00;  *PWM1CON1=0x77;
+   *(PWM1CON2+1)=0x0f;  *PWM1CON2=0x02;
+   *(P1DTCON1+1)=0x00;  *P1DTCON1=0x09; //0x09
+   *(P1DTCON2+1)=0x00;  *P1DTCON2=0x00;
+   *(P1FLTACON+1)=0x00;  *P1FLTACON=0x00; //0x0000
+   *(P1OVDCON+1)=0xFF;  *P1OVDCON=0xFF;
+   *(P1DC1+1) = duty[0]>>8;   *P1DC1 = duty[0];
+   *(P1DC2+1) = duty[1]>>8;   *P1DC2 = duty[1];
+   *(P1DC3+1) = duty[2]>>8;   *P1DC3 = duty[2];  
+   *(IPC14+1) =0x00;*(IPC14) =0x70;
+}
+void fill_sine_table(void)
+{
+   for(sine_index=0;sine_index < max_samples;sine_index++)
+   {
+      theeta=sine_index*2.0*PI/max_samples;
+      sine_table[sine_index]=255*sin(theeta);
+   }
+}
+
+void timer_reload(void) 
+{
+   double intr_per_sample = 0.0;
+   
+   for (int sample = 1 ; sample <= max_freq ; sample++) 
+   {
+      intr_per_sample = ((1.0/sample)*1000)/max_samples;
+      timer_table[sample] = intr_per_sample/per_clock_tick;     
+   }
+   timer_table[0] = timer_table[1];
+}
+
+void voltage_gain(void) 
+{
+   for (int i = 0 ; i <= break_level ; i++) {
+            gain_table[i] = 0; 
+   }
+   
+   for (int i = break_level+1 ; i <= sustain_level; i++) {     
+        temp = SLOPE * i + pedestal_amplitude;
+        if(temp > peak_amplitude ) 
+        {
+         temp = peak_amplitude;
+        }
+        gain_table[i] = temp;
+   }
+   for (int i = sustain_level+1 ; i <= 255; i++) {     
+   gain_table[i] = peak_amplitude;
+   }
+
+}

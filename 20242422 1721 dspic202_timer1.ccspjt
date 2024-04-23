@@ -1,0 +1,32 @@
+[PROJECT]
+Target=20242422 1721 dspic202_timer1.hex
+Processor_Text=DSPIC33FJ32MC202
+CCSVersion=5.112
+Compiler=PCD
+[Target Data]
+FileList=20242422 1721 dspic202_timer1.c
+[20242422 1721 dspic202_timer1.c]
+Type=4
+[mru-list]
+1=20242422 1721 dspic202_timer1.c
+[Units]
+Count=1
+1=20242422 1721 dspic202_timer1 (main)
+
+[defines]
+buildcount=1
+
+[ProjectLog]
+Days=1
+D1=23-04-2024
+D1_L=2
+D1_L1=[36666]Project Closed.
+D1_L2=[36670]Project Opened.
+
+[fileformats]
+forcecoff=0
+
+[Opened Files]
+1=20242422 1721 dspic202_timer1.c
+t1=1
+Count=1
