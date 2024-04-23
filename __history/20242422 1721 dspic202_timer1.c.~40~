@@ -288,8 +288,8 @@ void initMCPWM(void)
 {   
    *(P1TCON+1)=0x80;  *P1TCON=0x02;
  //  *(P1TMR+1)=0x00;  *P1TMR=0x78;
-   *(P1TPER+1)=0x02;  *P1TPER=0x70;  
-//!   *(P1TPER+1)=0x00;  *P1TPER=0xFA;
+//!   *(P1TPER+1)=0x02;  *P1TPER=0x70;  
+   *(P1TPER+1)=0x00;  *P1TPER=0xFA;
    *(P1SECMP+1)=0x00;  *P1SECMP=0x01; //
    *(PWM1CON1+1)=0x00;  *PWM1CON1=0x77;
    *(PWM1CON2+1)=0x0f;  *PWM1CON2=0x02;

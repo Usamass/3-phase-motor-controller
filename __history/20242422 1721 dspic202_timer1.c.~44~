@@ -232,8 +232,8 @@ void main()
 
    
    
-   *(CLKDIV+1)=0x00;  *CLKDIV=0b01000011; //PLLPOST=4 PLLPRE=5 total divider=20
-   *(PLLFBD+1)=0x00;  *PLLFBD=0b00100110; //PLLDIV=40 //
+//!   *(CLKDIV+1)=0x00;  *CLKDIV=0b01000011; //PLLPOST=4 PLLPRE=5 total divider=20
+//!   *(PLLFBD+1)=0x00;  *PLLFBD=0b00100110; //PLLDIV=40 //
 
    initMCPWM();
    set_tris_a(0x0001);

@@ -116,7 +116,6 @@ void  timer2_isr(void)
 void  PWM1_isr(void) 
 {
     output_bit(throttle_PIN , 1);
-    delay_us(10);
 //!   tick_count++;
 //!   if(tick_count >= 8)
 //!   {

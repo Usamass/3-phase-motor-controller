@@ -109,14 +109,12 @@ void  EXT0_isr(void)
 void  timer2_isr(void) 
 {
    tick = 1;
-  
+//!   output_toggle(Tick_Out);
 
 }
 #int_PWM1
 void  PWM1_isr(void) 
 {
-    output_bit(throttle_PIN , 1);
-    delay_us(10);
 //!   tick_count++;
 //!   if(tick_count >= 8)
 //!   {
@@ -125,8 +123,6 @@ void  PWM1_isr(void)
 //!      tick_count=0;
 //!   
 //!   }
-
-   output_bit(throttle_PIN , 0);
 }
 #INT_TIMER1
 void  timer1_isr(void) 

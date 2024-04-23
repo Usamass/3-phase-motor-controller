@@ -1,0 +1,5 @@
+Compiling C:\Users\eelab\Documents\motor_controller\20242422 1721 dspic202_timer1 on 23-Apr-24 at 14:02
+>>> Warning 202 "C:\Users\eelab\Documents\motor_controller\20242422 1721 dspic202_timer1.c" Line 71(6,16): Variable never used:   tick_count
+      Memory usage:   ROM=21%      RAM=69% - 80%
+      0 Errors,  1 Warnings.
+Build Successful.

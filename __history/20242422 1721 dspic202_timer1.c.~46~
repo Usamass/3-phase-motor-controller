@@ -297,9 +297,9 @@ void initMCPWM(void)
    *(P1DTCON2+1)=0x00;  *P1DTCON2=0x00;
    *(P1FLTACON+1)=0x00;  *P1FLTACON=0x00; //0x0000
    *(P1OVDCON+1)=0x7F;  *P1OVDCON=0x7F;
-   *(P1DC1+1) = duty[0]>>8;   *P1DC1 = duty[0];
-   *(P1DC2+1) = duty[1]>>8;   *P1DC2 = duty[1];
-   *(P1DC3+1) = duty[2]>>8;   *P1DC3 = duty[2];  
+//!   *(P1DC1+1) = duty[0]>>8;   *P1DC1 = duty[0];
+//!   *(P1DC2+1) = duty[1]>>8;   *P1DC2 = duty[1];
+//!   *(P1DC3+1) = duty[2]>>8;   *P1DC3 = duty[2];  
    *(IPC14+1) =0x00;*(IPC14) =0x70;
 }
 void fill_sine_table(void)

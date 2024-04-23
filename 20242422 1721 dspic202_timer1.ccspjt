@@ -9,24 +9,59 @@ FileList=20242422 1721 dspic202_timer1.c
 Type=4
 [mru-list]
 1=20242422 1721 dspic202_timer1.c
-[Units]
-Count=1
-1=20242422 1721 dspic202_timer1 (main)
 
 [defines]
-buildcount=1
+buildcount=43
 
 [ProjectLog]
 Days=1
 D1=23-04-2024
-D1_L=2
+D1_L=33
 D1_L1=[36666]Project Closed.
 D1_L2=[36670]Project Opened.
+D1_L3=[37281]Started Editing.
+D1_L4=[37633]Stopped Editing.
+D1_L5=[37634]Started Editing.
+D1_L6=[37979]Stopped Editing.
+D1_L7=[38107]Started Editing.
+D1_L8=[38407]Stopped Editing.
+D1_L9=[38426]Started Editing.
+D1_L10=[39162]Stopped Editing.
+D1_L11=[39173]Started Editing.
+D1_L12=[40331]Stopped Editing.
+D1_L13=[41333]Started Editing.
+D1_L14=[41633]Stopped Editing.
+D1_L15=[41634]Started Editing.
+D1_L16=[41935]Stopped Editing.
+D1_L17=[42371]Started Editing.
+D1_L18=[42676]Stopped Editing.
+D1_L19=[42701]Started Editing.
+D1_L20=[43160]Stopped Editing.
+D1_L21=[43230]Started Editing.
+D1_L22=[43530]Stopped Editing.
+TotalEdit=37
+TotalDebug=0
+D1_E=37
+D1_D=0
+D1_L23=[43697]Project Closed.
+D1_L24=[44885]Project Opened.
+D1_L25=[44886]Project Closed.
+D1_L26=[44903]Project Opened.
+D1_L27=[44979]Started Editing.
+D1_L28=[45511]Stopped Editing.
+D1_L29=[46128]Started Editing.
+D1_L30=[46830]Stopped Editing.
+D1_L31=[47623]Started Editing.
+D1_L32=[47931]Stopped Editing.
+D1_L33=[50609]Project Closed.
 
 [fileformats]
 forcecoff=0
 
 [Opened Files]
 1=20242422 1721 dspic202_timer1.c
-t1=1
+t1=271
 Count=1
+[Units]
+Count=1
+1=20242422 1721 dspic202_timer1 (main)

@@ -104,29 +104,17 @@ void  UART1E_isr(void)
 void  EXT0_isr(void) 
 {
 }
-
-#INT_TIMER2
-void  timer2_isr(void) 
-{
-   tick = 1;
-  
-
-}
 #int_PWM1
 void  PWM1_isr(void) 
 {
-    output_bit(throttle_PIN , 1);
-    delay_us(10);
-//!   tick_count++;
-//!   if(tick_count >= 8)
-//!   {
-//!      output_toggle(Tick_Out);
-//!      tick = 1;
-//!      tick_count=0;
-//!   
-//!   }
-
-   output_bit(throttle_PIN , 0);
+   tick_count++;
+   if(tick_count >= 8)
+   {
+      output_toggle(throttle_PIN);
+      tick = 1;
+      tick_count=0;
+   
+   }
 }
 #INT_TIMER1
 void  timer1_isr(void) 
@@ -181,10 +169,10 @@ void  timer1_isr(void)
    {
       output_bit(Sync_Out,0);
    }
-//!   if(sample == 0)
-//!   {
-//!      tick=1;
-//!   }
+   if(sample == 0)
+   {
+      tick=1;
+   }
    output_bit(Tick_Out,0);
 }
 void initMCPWM(void);
@@ -227,7 +215,7 @@ void main()
    output_bit(throttle_PIN , 0);
  //  output_bit(Shut_Down,1);
    enable_interrupts(INT_PWM1);
-//!   enable_interrupts(INT_EXT0);
+ //  enable_interrupts(INT_EXT0);
 
 
    
@@ -254,9 +242,6 @@ void main()
    set_adc_channel(5);
    delay_us(10);
    setup_timer1(TMR_INTERNAL | TMR_DIV_BY_64 , timer_table[freq]);
-   setup_timer2(TMR_INTERNAL | TMR_DIV_BY_64, 156);
-
-   enable_interrupts(INT_TIMER2);
    enable_interrupts(INT_TIMER1);
    enable_interrupts(INTR_GLOBAL);
    
@@ -296,7 +281,7 @@ void initMCPWM(void)
    *(P1DTCON1+1)=0x00;  *P1DTCON1=0x09; //0x09
    *(P1DTCON2+1)=0x00;  *P1DTCON2=0x00;
    *(P1FLTACON+1)=0x00;  *P1FLTACON=0x00; //0x0000
-   *(P1OVDCON+1)=0x7F;  *P1OVDCON=0x7F;
+   *(P1OVDCON+1)=0xFF;  *P1OVDCON=0xFF;
    *(P1DC1+1) = duty[0]>>8;   *P1DC1 = duty[0];
    *(P1DC2+1) = duty[1]>>8;   *P1DC2 = duty[1];
    *(P1DC3+1) = duty[2]>>8;   *P1DC3 = duty[2];  

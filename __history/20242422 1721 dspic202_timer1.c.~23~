@@ -104,36 +104,24 @@ void  UART1E_isr(void)
 void  EXT0_isr(void) 
 {
 }
-
-#INT_TIMER2
-void  timer2_isr(void) 
-{
-   tick = 1;
-  
-
-}
 #int_PWM1
 void  PWM1_isr(void) 
 {
-    output_bit(throttle_PIN , 1);
-    delay_us(10);
-//!   tick_count++;
-//!   if(tick_count >= 8)
-//!   {
-//!      output_toggle(Tick_Out);
-//!      tick = 1;
-//!      tick_count=0;
-//!   
-//!   }
-
-   output_bit(throttle_PIN , 0);
+   tick_count++;
+   if(tick_count >= 8)
+   {
+      output_toggle(Tick_Out);
+      tick = 1;
+      tick_count=0;
+   
+   }
 }
 #INT_TIMER1
 void  timer1_isr(void) 
 {
 
 //!   output_toggle(TOGGLE_PIN);
-   output_bit(Tick_Out,1);
+//!   output_bit(Tick_Out,1);
 //!   set_adc_channel(5);
    sample = (sample+1)%max_samples;
    phase_angle[0] = sample;
@@ -185,7 +173,7 @@ void  timer1_isr(void)
 //!   {
 //!      tick=1;
 //!   }
-   output_bit(Tick_Out,0);
+//!   output_bit(Tick_Out,0);
 }
 void initMCPWM(void);
 void fill_sine_table(void);
@@ -254,16 +242,14 @@ void main()
    set_adc_channel(5);
    delay_us(10);
    setup_timer1(TMR_INTERNAL | TMR_DIV_BY_64 , timer_table[freq]);
-   setup_timer2(TMR_INTERNAL | TMR_DIV_BY_64, 156);
-
-   enable_interrupts(INT_TIMER2);
    enable_interrupts(INT_TIMER1);
+   enable_interrupts(INT_TIMER2);
    enable_interrupts(INTR_GLOBAL);
    
    while(TRUE)
    { 
-   if(tick)
-      {
+//!   if(tick)
+//!      {
  //        tick=0;
          raw_adc = read_adc();
          raw_adc = raw_adc >> 2;
@@ -279,10 +265,11 @@ void main()
          freq = throttle_level - 5 ;
          peak_voltage = gain_table[throttle_level];
          setup_timer1(TMR_INTERNAL | TMR_DIV_BY_64 , timer_table[freq]);
+         setup_timer2(TMR_INTERNAL | TMR_DIV_BY_64 , 5000);
          tick = 0;
          //putc(1,49);
       }   
-   }
+//!   }
 }
 void initMCPWM(void)
 {   

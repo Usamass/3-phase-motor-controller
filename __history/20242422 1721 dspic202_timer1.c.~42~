@@ -286,17 +286,29 @@ void main()
 }
 void initMCPWM(void)
 {   
-   *(P1TCON+1)=0x80;  *P1TCON=0x02;
- //  *(P1TMR+1)=0x00;  *P1TMR=0x78;
-   *(P1TPER+1)=0x02;  *P1TPER=0x70;  
+//!   *(P1TCON+1)=0x80;  *P1TCON=0x02;
+//! //  *(P1TMR+1)=0x00;  *P1TMR=0x78;
+//!   *(P1TPER+1)=0x02;  *P1TPER=0x70;  
 //!   *(P1TPER+1)=0x00;  *P1TPER=0xFA;
+//!   *(P1SECMP+1)=0x00;  *P1SECMP=0x01; //
+//!   *(PWM1CON1+1)=0x00;  *PWM1CON1=0x77;
+//!   *(PWM1CON2+1)=0x0f;  *PWM1CON2=0x02;
+//!   *(P1DTCON1+1)=0x00;  *P1DTCON1=0x09; //0x09
+//!   *(P1DTCON2+1)=0x00;  *P1DTCON2=0x00;
+//!   *(P1FLTACON+1)=0x00;  *P1FLTACON=0x00; //0x0000
+//!   *(P1OVDCON+1)=0x7F;  *P1OVDCON=0x7F;
+    *(P1TCON+1)=0x80;  *P1TCON=0x02;
+ //  *(P1TMR+1)=0x00;  *P1TMR=0x78;
+   *(P1TPER+1)=0x00;  *P1TPER=0xFA;  
    *(P1SECMP+1)=0x00;  *P1SECMP=0x01; //
-   *(PWM1CON1+1)=0x00;  *PWM1CON1=0x77;
+   *(PWM1CON1+1)=0x00;  *PWM1CON1=0x33;
    *(PWM1CON2+1)=0x0f;  *PWM1CON2=0x02;
    *(P1DTCON1+1)=0x00;  *P1DTCON1=0x09; //0x09
    *(P1DTCON2+1)=0x00;  *P1DTCON2=0x00;
    *(P1FLTACON+1)=0x00;  *P1FLTACON=0x00; //0x0000
-   *(P1OVDCON+1)=0x7F;  *P1OVDCON=0x7F;
+   *(P1OVDCON+1)=0x0F;  *P1OVDCON=0x0f;
+
+
    *(P1DC1+1) = duty[0]>>8;   *P1DC1 = duty[0];
    *(P1DC2+1) = duty[1]>>8;   *P1DC2 = duty[1];
    *(P1DC3+1) = duty[2]>>8;   *P1DC3 = duty[2];  
