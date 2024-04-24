@@ -26,11 +26,13 @@
 
 
 #define Tick_Out PIN_B0
+#define LED_PIN PIN_B5
 //!#define TOGGLE_PIN PIN_B1
 //!#define ADC_TIME_CHECK PIN_B1
 #define Sync_Out PIN_A4
 #define Shut_Down PIN_A1
 #define Div_pin PIN_B2
+#define ADC_pin sAN5
 
 #define voltage_offset 624//1248
 #define low_duty_limit 32
@@ -69,6 +71,7 @@ unsigned int16 freq = 1;
 unsigned int16 temp = 0;
 
 int8 tick_count = 0;
+int16 millis_count = 0;
 
 void timer_reload(void);
 void voltage_gain(void);
@@ -121,7 +124,8 @@ void  PWM1_isr(void)
 //!      tick =1;
    tick_count++;
    if(tick_count >= 8)
-   {
+   {  
+         millis_count++;
          output_bit(throttle_PIN , 1);
          raw_adc = read_adc();
          raw_adc = raw_adc >> 2;
@@ -142,6 +146,10 @@ void  PWM1_isr(void)
 //!         tick = 1;
          tick_count=0;
    
+   }
+   if (millis_count >= 500) {
+      output_toggle(LED_PIN , 1);
+      millis_count = 0;
    }
 //!
 //!   output_bit(throttle_PIN , 0);
@@ -261,13 +269,14 @@ void main()
 //!   output_bit(UART_VCC,1);
   
    output_drive(Tick_Out);
+   output_drive(LED_PIN);
 //!   output_drive(TOGGLE_PIN);
    output_drive(Sync_Out);
    output_drive(throttle_PIN);
    
 //!   setup_adc(ADC_CLOCK_INTERNAL);
    setup_adc(ADC_CLOCK_DIV_32);
-   setup_adc_ports(sAN5);
+   setup_adc_ports(ADC_pin);
    
    set_adc_channel(5);
    delay_us(10);

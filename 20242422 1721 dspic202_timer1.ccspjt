@@ -11,7 +11,7 @@ Type=4
 1=20242422 1721 dspic202_timer1.c
 
 [defines]
-buildcount=56
+buildcount=64
 
 [ProjectLog]
 Days=2
@@ -39,7 +39,7 @@ D1_L19=[42701]Started Editing.
 D1_L20=[43160]Stopped Editing.
 D1_L21=[43230]Started Editing.
 D1_L22=[43530]Stopped Editing.
-TotalEdit=37
+TotalEdit=64
 TotalDebug=0
 D1_E=37
 D1_D=0
@@ -55,20 +55,36 @@ D1_L31=[47623]Started Editing.
 D1_L32=[47931]Stopped Editing.
 D1_L33=[50609]Project Closed.
 D2=24-04-2024
-D2_L=6
+D2_L=20
 D2_L1=[32891]Project Opened.
 D2_L2=[33174]Started Editing.
 D2_L3=[33988]Stopped Editing.
 D2_L4=[34303]Started Editing.
 D2_L5=[34761]Stopped Editing.
 D2_L6=[34782]Started Editing.
+D2_L7=[35083]Stopped Editing.
+D2_L8=[36747]Started Editing.
+D2_L9=[37070]Stopped Editing.
+D2_L10=[37452]Started Editing.
+D2_L11=[37855]Stopped Editing.
+D2_L12=[38217]Started Editing.
+D2_L13=[38222]Stopped Editing.
+D2_E=27
+D2_D=0
+D2_L14=[38222]Project Closed.
+D2_L15=[47069]Project Opened.
+D2_L16=[47111]Started Editing.
+D2_L17=[48080]Stopped Editing.
+D2_L18=[50401]Started Editing.
+D2_L19=[50783]Stopped Editing.
+D2_L20=[51524]Project Closed.
 
 [fileformats]
 forcecoff=0
 
 [Opened Files]
 1=20242422 1721 dspic202_timer1.c
-t1=41
+t1=115
 Count=1
 [Units]
 Count=1

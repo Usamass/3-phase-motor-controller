@@ -1,9 +1,9 @@
-D G "__PCD__" 0 366 ""5.112""
-D G "__DEVICE__" 0 366 "2202"
-D G "__DATE__" 0 366 ""24-Apr-24""
-D G "__TIME__" 0 366 ""09:39:46""
-D G "_UNICODE" 0 366 ""?""
-D G "__EVAL" 0 366 ""?"" "!#include <pwm_3.h>"
+D G "__PCD__" 0 375 ""5.112""
+D G "__DEVICE__" 0 375 "2202"
+D G "__DATE__" 0 375 ""24-Apr-24""
+D G "__TIME__" 0 375 ""13:16:21""
+D G "_UNICODE" 0 375 ""?""
+D G "__EVAL" 0 375 ""?"" "!#include <pwm_3.h>"
 c L "set_tris_a" 1 1 20 "FUNCTION"
 F N "set_tris_a" 1 61 ""
 V L "value" 1 61 "int16" `55 
@@ -1912,104 +1912,107 @@ D G "IPC14" 0 23 "0x00C0"
 D G "CLKDIV" 0 24 "0x0744"
 D G "PLLFBD" 0 25 "0x0746"
 D G "Tick_Out" 0 28 "PIN_B0"
-D G "Sync_Out" 0 31 "PIN_A4"
-D G "Shut_Down" 0 32 "PIN_A1"
-D G "Div_pin" 0 33 "PIN_B2"
-D G "voltage_offset" 0 35 "624" "1248"
-D G "low_duty_limit" 0 36 "32"
-D G "high_duty_limit" 0 37 "1217"
-D G "SLOPE" 0 38 "2.7"
-D G "break_level" 0 40 "5"
-D G "sustain_level" 0 41 "200"
-D G "break_amplitude" 0 42 "0"
-D G "pedestal_amplitude" 0 43 "10"
-D G "peak_amplitude" 0 44 "550"
-D G "throttle_PIN" 0 46 "PIN_B1"
-D G "Voltage_Current_PIN" 0 48 "PIN_B11"
-V G "max_samples" 0 53 "int16" `1200 
-V G "duty" 0 54 "int16[3]" `1202 
-V G "sample" 0 54 "int16" `1203 
-V G "sine_table" 0 55 "sint16[30]" `1204 
-V G "sine_index" 0 56 "int16" `1205 
-V G "phase_angle" 0 56 "int16[3]" `1206 
-V G "theeta" 0 57 "?" `1207 
-V G "reference" 0 58 "sint32[3]" `1208 
-V G "tick" 0 60 "int1" `1209 
-V G "peak_voltage" 0 61 "sint16" `1210 
-V G "max_freq" 0 62 "int16" `1211 
-V G "per_clock_tick" 0 63 "?" `1213 
-V G "timer_table" 0 64 "int16[251]" `1215 
-V G "gain_table" 0 65 "int16[256]" `1216 
-V G "raw_adc" 0 66 "int16" `1217 
-V G "throttle_level" 0 67 "sint16" `1218 
-V G "freq" 0 68 "int16" `1219 
-V G "temp" 0 69 "int16" `1220 
-V G "tick_count" 0 71 "sint8" `1221 
-F N "timer_reload" 0 73 ""
-f G "timer_reload" 0 73 "void()" `1222 
-F N "voltage_gain" 0 74 ""
-f G "voltage_gain" 0 74 "void()" `1223 
-F N "RDA_isr" 0 77 ""
-F G "RDA_isr" 0 78 "void()" `1224  "!     if(U1STA.URXDA == 1)"
-C L "RDA_isr" 0 29 6 "FUNCTION"
-F N "TBE_isr" 0 88 ""
-F G "TBE_isr" 0 89 "void()" `1225  "IFS0.U1TXIF = 0; // Clear TX Interrupt flag"
-C L "TBE_isr" 0 29 1 "FUNCTION"
-F N "UART1E_isr" 0 94 ""
-F G "UART1E_isr" 0 95 "void()" `1226  "Must clear the overrun error to keep UART receiving *"
-C L "UART1E_isr" 0 29 1 "FUNCTION"
-C L "UART1E_isr" 0 29 1 "FUNCTION"
-F N "EXT0_isr" 0 104 ""
-F G "EXT0_isr" 0 105 "void()" `1227 
-F N "timer2_isr" 0 109 ""
-F G "timer2_isr" 0 110 "void()" `1228 
-F N "PWM1_isr" 0 116 ""
-F G "PWM1_isr" 0 117 "void()" `1229  "!    output_bit(throttle_PIN , 1);"
-C L "PWM1_isr" 0 29 2 "FUNCTION"
-C L "PWM1_isr" 0 29 1 "FUNCTION"
-C L "PWM1_isr" 0 29 1 "FUNCTION"
-F N "timer1_isr" 0 150 ""
-F G "timer1_isr" 0 151 "void()" `1230  "!   output_toggle(TOGGLE_PIN);"
-C L "timer1_isr" 0 29 1 "FUNCTION"
-V L "i" 0 161 "sint16" `1231 
-C L "timer1_isr" 0 29 2 "FUNCTION"
-C L "timer1_isr" 0 29 4 "FUNCTION"
-F N "initMCPWM" 0 208 ""
-f G "initMCPWM" 0 208 "void()" `1235 
-F N "fill_sine_table" 0 209 ""
-f G "fill_sine_table" 0 209 "void()" `1236 
-F N "MAIN" 0 210 ""
-F G "MAIN" 0 211 "void()" `1237 
-C L "MAIN" 0 29 13 "FUNCTION"
-C L "MAIN" 0 29 2 "FUNCTION"
-C L "MAIN" 0 29 2 "FUNCTION"
-C L "MAIN" 0 29 1 "FUNCTION"
-C L "MAIN" 0 29 1 "FUNCTION"
-C L "MAIN" 0 29 1 "FUNCTION"
-C L "MAIN" 0 29 1 "FUNCTION"
-C L "MAIN" 0 29 1 "FUNCTION"
-C L "MAIN" 0 29 2 "FUNCTION"
-C L "MAIN" 0 29 1 "FUNCTION"
-C L "MAIN" 0 29 1 "FUNCTION"
-C L "MAIN" 0 29 2 "FUNCTION"
-C L "MAIN" 0 29 18 "FUNCTION"
-F N "initMCPWM" 0 307 ""
-F G "initMCPWM" 0 308 "void()" `1235 
-C L "initMCPWM" 0 310 1 "*"
-C L "initMCPWM" 0 310 1 "FUNCTION"
-C L "initMCPWM" 0 310 1 "FUNCTION"
-C L "initMCPWM" 0 310 1 "FUNCTION"
-F N "fill_sine_table" 0 325 ""
-F G "fill_sine_table" 0 326 "void()" `1236 
-F N "timer_reload" 0 334 ""
-F G "timer_reload" 0 335 "void()" `1222 
-V L "intr_per_sample" 0 336 "?" `1240 
-V L "sample" 0 338 "sint16" `1241 
-F N "voltage_gain" 0 346 ""
-F G "voltage_gain" 0 347 "void()" `1223 
-V L "i" 0 348 "sint16" `1242 
-V L "i" 0 352 "sint16" `1243 
-V L "i" 0 360 "sint16" `1244 
+D G "LED_PIN" 0 29 "PIN_B5"
+D G "Sync_Out" 0 32 "PIN_A4"
+D G "Shut_Down" 0 33 "PIN_A1"
+D G "Div_pin" 0 34 "PIN_B2"
+D G "ADC_pin" 0 35 "sAN5"
+D G "voltage_offset" 0 37 "624" "1248"
+D G "low_duty_limit" 0 38 "32"
+D G "high_duty_limit" 0 39 "1217"
+D G "SLOPE" 0 40 "2.7"
+D G "break_level" 0 42 "5"
+D G "sustain_level" 0 43 "200"
+D G "break_amplitude" 0 44 "0"
+D G "pedestal_amplitude" 0 45 "10"
+D G "peak_amplitude" 0 46 "550"
+D G "throttle_PIN" 0 48 "PIN_B1"
+D G "Voltage_Current_PIN" 0 50 "PIN_B11"
+V G "max_samples" 0 55 "int16" `1200 
+V G "duty" 0 56 "int16[3]" `1202 
+V G "sample" 0 56 "int16" `1203 
+V G "sine_table" 0 57 "sint16[30]" `1204 
+V G "sine_index" 0 58 "int16" `1205 
+V G "phase_angle" 0 58 "int16[3]" `1206 
+V G "theeta" 0 59 "?" `1207 
+V G "reference" 0 60 "sint32[3]" `1208 
+V G "tick" 0 62 "int1" `1209 
+V G "peak_voltage" 0 63 "sint16" `1210 
+V G "max_freq" 0 64 "int16" `1211 
+V G "per_clock_tick" 0 65 "?" `1213 
+V G "timer_table" 0 66 "int16[251]" `1215 
+V G "gain_table" 0 67 "int16[256]" `1216 
+V G "raw_adc" 0 68 "int16" `1217 
+V G "throttle_level" 0 69 "sint16" `1218 
+V G "freq" 0 70 "int16" `1219 
+V G "temp" 0 71 "int16" `1220 
+V G "tick_count" 0 73 "sint8" `1221 
+V G "millis_count" 0 74 "sint16" `1222 
+F N "timer_reload" 0 76 ""
+f G "timer_reload" 0 76 "void()" `1223 
+F N "voltage_gain" 0 77 ""
+f G "voltage_gain" 0 77 "void()" `1224 
+F N "RDA_isr" 0 80 ""
+F G "RDA_isr" 0 81 "void()" `1225  "!     if(U1STA.URXDA == 1)"
+C L "RDA_isr" 0 30 6 "FUNCTION"
+F N "TBE_isr" 0 91 ""
+F G "TBE_isr" 0 92 "void()" `1226  "IFS0.U1TXIF = 0; // Clear TX Interrupt flag"
+C L "TBE_isr" 0 30 1 "FUNCTION"
+F N "UART1E_isr" 0 97 ""
+F G "UART1E_isr" 0 98 "void()" `1227  "Must clear the overrun error to keep UART receiving *"
+C L "UART1E_isr" 0 30 1 "FUNCTION"
+C L "UART1E_isr" 0 30 1 "FUNCTION"
+F N "EXT0_isr" 0 107 ""
+F G "EXT0_isr" 0 108 "void()" `1228 
+F N "timer2_isr" 0 112 ""
+F G "timer2_isr" 0 113 "void()" `1229 
+F N "PWM1_isr" 0 119 ""
+F G "PWM1_isr" 0 120 "void()" `1230  "!    output_bit(throttle_PIN , 1);"
+C L "PWM1_isr" 0 30 2 "FUNCTION"
+C L "PWM1_isr" 0 30 1 "FUNCTION"
+C L "PWM1_isr" 0 30 1 "FUNCTION"
+F N "timer1_isr" 0 158 ""
+F G "timer1_isr" 0 159 "void()" `1231  "!   output_toggle(TOGGLE_PIN);"
+C L "timer1_isr" 0 30 1 "FUNCTION"
+V L "i" 0 169 "sint16" `1232 
+C L "timer1_isr" 0 30 2 "FUNCTION"
+C L "timer1_isr" 0 30 4 "FUNCTION"
+F N "initMCPWM" 0 216 ""
+f G "initMCPWM" 0 216 "void()" `1236 
+F N "fill_sine_table" 0 217 ""
+f G "fill_sine_table" 0 217 "void()" `1237 
+F N "MAIN" 0 218 ""
+F G "MAIN" 0 219 "void()" `1238 
+C L "MAIN" 0 30 13 "FUNCTION"
+C L "MAIN" 0 30 2 "FUNCTION"
+C L "MAIN" 0 30 2 "FUNCTION"
+C L "MAIN" 0 30 1 "FUNCTION"
+C L "MAIN" 0 30 1 "FUNCTION"
+C L "MAIN" 0 30 1 "FUNCTION"
+C L "MAIN" 0 30 1 "FUNCTION"
+C L "MAIN" 0 30 1 "FUNCTION"
+C L "MAIN" 0 30 2 "FUNCTION"
+C L "MAIN" 0 30 1 "FUNCTION"
+C L "MAIN" 0 30 1 "FUNCTION"
+C L "MAIN" 0 30 2 "FUNCTION"
+C L "MAIN" 0 30 18 "FUNCTION"
+F N "initMCPWM" 0 316 ""
+F G "initMCPWM" 0 317 "void()" `1236 
+C L "initMCPWM" 0 319 1 "*"
+C L "initMCPWM" 0 319 1 "FUNCTION"
+C L "initMCPWM" 0 319 1 "FUNCTION"
+C L "initMCPWM" 0 319 1 "FUNCTION"
+F N "fill_sine_table" 0 334 ""
+F G "fill_sine_table" 0 335 "void()" `1237 
+F N "timer_reload" 0 343 ""
+F G "timer_reload" 0 344 "void()" `1223 
+V L "intr_per_sample" 0 345 "?" `1241 
+V L "sample" 0 347 "sint16" `1242 
+F N "voltage_gain" 0 355 ""
+F G "voltage_gain" 0 356 "void()" `1224 
+V L "i" 0 357 "sint16" `1243 
+V L "i" 0 361 "sint16" `1244 
+V L "i" 0 369 "sint16" `1245 
 F B "reset_cpu" 0 0
 F B "abs" 1 0
 F B "sleep" 0 1

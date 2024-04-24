@@ -20,37 +20,37 @@ W0 -W2  @F48TO64.P17
 W0 -W2  @F48TOSI64.P18
 W0 -W3  @I64TOF48.P19
 W0      @SITOF.P20
-W0 -W1  @MULS3232.P21
+W0      @delay_us1.P21
 W0      @delay_ms1.P22
 W0 -W3  @MULFF64.P23
 W0 -W2  @ADDFF48.P24
-W0      @delay_us1.P25
-W0 -W3  @F64TOSI64.P26
-W0 -W3  @F64TOI64.P27
-W0 -W2  @DIVFF48.P28
+W0 -W3  @F64TOSI64.P25
+W0 -W3  @F64TOI64.P26
+W0 -W2  @DIVFF48.P27
+W0 -W1  @MULS3232.P28
 W1      @SCRATCH
 W1      @READ_PACKED_MEMORY.P1
 W1      @WRITE_PACKED_MEMORY.P2
-W2 -W3  @DIVFF.P1
+W2 -W3  @ADDFF.P1
 W2 -W3  @FLT.P2
-W2 -W3  @ADDFF.P3
-W2 -W3  @MULS3232.P4
-W2 -W3  @DIV3232B.P5
+W2 -W3  @DIVFF.P3
+W2 -W3  @DIV3232B.P4
+W2 -W3  @MULS3232.P5
 W2      @READ_ROM_MEMORY.P6
-W2      @READ_PACKED_MEMORY.P7
-W2 -W3  @MULFF.P8
-W2      @WRITE_PACKED_MEMORY.P9
-W3      @READ_PACKED_MEMORY.P1
-W3      @WRITE_PACKED_MEMORY.P2
-W3 -W5  @MULFF48.P3
-W3 -W5  @ADDFF48.P4
+W2 -W3  @MULFF.P7
+W2      @WRITE_PACKED_MEMORY.P8
+W2      @READ_PACKED_MEMORY.P9
+W3 -W5  @MULFF48.P1
+W3      @READ_PACKED_MEMORY.P2
+W3 -W5  @ADDFF48.P3
+W3      @WRITE_PACKED_MEMORY.P4
 W3      @READ_ROM_MEMORY.P5
 W3 -W5  @DIVFF48.P6
 W3 -W5  @FLT48.P7
 W4 -W7  @MULFF64.P1
-W4 -W7  @FLT64.P2
+W4 -W7  @DIVFF64.P2
 W4 -W7  @ADDFF64.P3
-W4 -W7  @DIVFF64.P4
+W4 -W7  @FLT64.P4
 800-827 pas_64
 828-84F qas_64
 850-87F pat_64
@@ -71,21 +71,22 @@ D0A-D0B raw_adc
 D0C-D0D throttle_level
 D0E-D0F freq
 D10-D11 temp
-D12-D13 voltage_gain.i
-D12-D19 timer_reload.intr_per_sample
+D12-D13 millis_count
+D14-D1B timer_reload.intr_per_sample
 D14-D15 voltage_gain.i
-D16-D1D sin.x
 D16-D17 voltage_gain.i
-D1A-D1B timer_reload.sample
-D26-D2D cos.x
-D2E     cos.quad
-D2F     cos.i
-D30-D37 cos.y
-D38-D3F cos.t
-D40-D47 cos.t2
-D48-D4F cos.frac
-D50-D97 cos.p_64
-DD8-DD9 timer1_isr.i
+D18-D1F sin.x
+D18-D19 voltage_gain.i
+D1C-D1D timer_reload.sample
+D28-D2F cos.x
+D30     cos.quad
+D31     cos.i
+D32-D39 cos.y
+D3A-D41 cos.t
+D42-D49 cos.t2
+D4A-D51 cos.frac
+D52-D99 cos.p_64
+DDA-DDB timer1_isr.i
 F80-FFF _STACK_
 
 ROM Allocation:
@@ -95,37 +96,37 @@ ROM Allocation:
 000260  EXT0_isr
 000280  timer2_isr
 0002A2  PWM1_isr
-00031E  @MULS3232
-000360  timer1_isr
-00056E  @SI64TOF64
-0005D8  @DIVFF64
-0006E0  @MULFF64
-0007F0  @F64TOI64
-00084E  timer_reload
-00091E  @ADDFF64
-000B0C  voltage_gain
-000BD4  @I64TOF64
-000C3E  @FLT64
-000CC2  cos
-000F6A  sin
-000FA6  @F64TOSI64
-001004  fill_sine_table
-0010CC  initMCPWM
-001126  MAIN
-001126  @cinit1
-001150  @cinit2
+00032C  @MULS3232
+00036E  timer1_isr
+00057C  @SI64TOF64
+0005E6  @DIVFF64
+0006EE  @MULFF64
+0007FE  @F64TOI64
+00085C  timer_reload
+00092C  @ADDFF64
+000B1A  voltage_gain
+000BE2  @I64TOF64
+000C4C  @FLT64
+000CD0  cos
+000F78  sin
+000FB4  @F64TOSI64
+001012  fill_sine_table
+0010DA  initMCPWM
+001134  MAIN
+001134  @cinit1
+001160  @cinit2
 
 Project Directory:
     C:\Users\eelab\Documents\motor_controller\
 
 Project Files:
-    20242422 1721 dspic202_timer1.c                         [24-Apr-24 09:39  CRC=FD800541]
+    20242422 1721 dspic202_timer1.c                         [24-Apr-24 13:16  CRC=6C062E5D]
     ..\..\..\..\Program Files (x86)\PICC\Devices\33FJ32MC202.h [21-Oct-22 11:12  CRC=D42B45C9]
     ..\..\..\..\Program Files (x86)\PICC\Drivers\math.h     [05-May-20 13:57  CRC=02232397]
 
-Source signature=D5F19238
+Source signature=4477BB54
 Program memory checksum=0000
-Hex file CRC=0B72
+Hex file CRC=D7F4
 
 Units:
     C:\Users\eelab\Documents\motor_controller\20242422 1721 dspic202_timer1 (main)
