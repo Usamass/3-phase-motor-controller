@@ -63,29 +63,29 @@ W4 -W7  @DIVFF64.P4
 8FC-903 theeta
 904-90F reference
 910.0   tick
-910.1   tick_count
+911     tick_count
 912-913 peak_voltage
-914-B07 timer_table
-B08-D07 gain_table
-D08-D09 raw_adc
-D0A-D0B throttle_level
-D0C-D0D freq
-D0E-D0F temp
-D10-D11 voltage_gain.i
-D10-D17 timer_reload.intr_per_sample
+914-B09 timer_table
+B0A-D09 gain_table
+D0A-D0B raw_adc
+D0C-D0D throttle_level
+D0E-D0F freq
+D10-D11 temp
 D12-D13 voltage_gain.i
-D14-D1B sin.x
+D12-D19 timer_reload.intr_per_sample
 D14-D15 voltage_gain.i
-D18-D19 timer_reload.sample
-D24-D2B cos.x
-D2C     cos.quad
-D2D     cos.i
-D2E-D35 cos.y
-D36-D3D cos.t
-D3E-D45 cos.t2
-D46-D4D cos.frac
-D4E-D95 cos.p_64
-DD6-DD7 timer1_isr.i
+D16-D1D sin.x
+D16-D17 voltage_gain.i
+D1A-D1B timer_reload.sample
+D26-D2D cos.x
+D2E     cos.quad
+D2F     cos.i
+D30-D37 cos.y
+D38-D3F cos.t
+D40-D47 cos.t2
+D48-D4F cos.frac
+D50-D97 cos.p_64
+DD8-DD9 timer1_isr.i
 F80-FFF _STACK_
 
 ROM Allocation:
@@ -95,37 +95,37 @@ ROM Allocation:
 000260  EXT0_isr
 000280  timer2_isr
 0002A2  PWM1_isr
-0002CA  @MULS3232
-00030C  timer1_isr
-00051A  @SI64TOF64
-000584  @DIVFF64
-00068C  @MULFF64
-00079C  @F64TOI64
-0007FA  timer_reload
-0008CA  @ADDFF64
-000AB8  voltage_gain
-000B80  @I64TOF64
-000BEA  @FLT64
-000C6E  cos
-000F16  sin
-000F52  @F64TOSI64
-000FB0  fill_sine_table
-001078  initMCPWM
-0010D2  MAIN
-0010D2  @cinit1
-0010FC  @cinit2
+00031E  @MULS3232
+000360  timer1_isr
+00056E  @SI64TOF64
+0005D8  @DIVFF64
+0006E0  @MULFF64
+0007F0  @F64TOI64
+00084E  timer_reload
+00091E  @ADDFF64
+000B0C  voltage_gain
+000BD4  @I64TOF64
+000C3E  @FLT64
+000CC2  cos
+000F6A  sin
+000FA6  @F64TOSI64
+001004  fill_sine_table
+0010CC  initMCPWM
+001126  MAIN
+001126  @cinit1
+001150  @cinit2
 
 Project Directory:
     C:\Users\eelab\Documents\motor_controller\
 
 Project Files:
-    20242422 1721 dspic202_timer1.c                         [23-Apr-24 14:02  CRC=AF382D07]
+    20242422 1721 dspic202_timer1.c                         [24-Apr-24 09:39  CRC=FD800541]
     ..\..\..\..\Program Files (x86)\PICC\Devices\33FJ32MC202.h [21-Oct-22 11:12  CRC=D42B45C9]
     ..\..\..\..\Program Files (x86)\PICC\Drivers\math.h     [05-May-20 13:57  CRC=02232397]
 
-Source signature=87A9B9FE
+Source signature=D5F19238
 Program memory checksum=0000
-Hex file CRC=20D1
+Hex file CRC=0B72
 
 Units:
     C:\Users\eelab\Documents\motor_controller\20242422 1721 dspic202_timer1 (main)

@@ -1,23 +1,23 @@
 
-ROM used:   4796/22528 (21%)
-            4796/22528 (21%) including unused fragments
+ROM used:   4790/22528 (21%)
+            4790/22528 (21%) including unused fragments
 
             1.4 Average locations per line
             4.5 Average locations per statement
 
-RAM used:   1423/2048 (69%) at main() level
-            1630/2048 (80%) worst case
+RAM used:   1426/2048 (70%) at main() level
+            1633/2048 (80%) worst case
 
 Stack used: 96 worst case (46 in main + 50 for interrupts)
 Stack size: 128
 
 Lines Stmts  %   Files
 ----- ----- ---  -----
-  345   136  13  20242422 1721 dspic202_timer1.c
+  365   136  13  20242422 1721 dspic202_timer1.c
   844     0   0  ..\..\..\..\Program Files (x86)\PICC\Devices\33FJ32MC202.h
  2228   925  87  ..\..\..\..\Program Files (x86)\PICC\Drivers\math.h
 ----- -----
- 3417  1061 Total
+ 3437  1061 Total
 
 Page ROM  %  RAM    Vol Diff  Functions:
 ---- --- --- ---    --- ----  ----------
@@ -36,10 +36,10 @@ Page ROM  %  RAM    Vol Diff  Functions:
 0     32   0    0      6  1.0  UART1E_isr
 0     32   0    0      5  1.0  EXT0_isr
 0     34   0    0     22  1.2  timer2_isr
-0     40   0    0     74  1.6  PWM1_isr
+0    124   1    0    489  6.7  PWM1_isr
 0    526   5    2   1823  8.4  timer1_isr
 0     66   1    1             @MULS3232
-0    490   5    0   1436  7.3  MAIN
+0    400   4    0    857  5.3  MAIN
 0     90   1    0   1224  3.9  initMCPWM
 0    200   2    0    175  4.2  fill_sine_table
 0    208   2   10    258  4.4  timer_reload
@@ -49,20 +49,20 @@ Page ROM  %  RAM    Vol Diff  Functions:
 Program metrics:
     Functions               14
     Statements              1061
-    Comments                528
-    Volume (V)              9823
-    Difficulty (D)          52.9
-    Effort to implement (E) 519959
-    Time to implement (T)   8 hours, 1 minutes
+    Comments                544
+    Volume (V)              9761
+    Difficulty (D)          55.7
+    Effort to implement (E) 544024
+    Time to implement (T)   8 hours, 24 minutes
     Est Delivered Bugs (B)  2
-    Cyclomatic Complexity   20
-    Maintainability (MI)    62
+    Cyclomatic Complexity   21
+    Maintainability (MI)    55
 
  Segment     Used  Free
 -----------  ----  ----
 00000-00002     4  0  
 00004-001FE   508  0  
-00200-057FE  4284  17732  
+00200-057FE  4278  17738  
 
 
 

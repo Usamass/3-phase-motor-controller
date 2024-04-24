@@ -61,14 +61,14 @@ int1 tick=0;
 signed int16 peak_voltage =0;//  1184; 
 const unsigned max_freq = 250; //Hz
 const double per_clock_tick = 0.006405; //ms
-unsigned int16 timer_table[max_freq+1];
+unsigned int16 timer_table[max_freq];
 unsigned int16 gain_table[256];
 unsigned int16 raw_adc =0 ;
 signed int16 throttle_level = 0;
 unsigned int16 freq = 1;
 unsigned int16 temp = 0;
 
-int8 tick_count = 0;
+int tick_count = 0;
 
 void timer_reload(void);
 void voltage_gain(void);
@@ -115,35 +115,18 @@ void  timer2_isr(void)
 #int_PWM1
 void  PWM1_isr(void) 
 {
-   
 //!    output_bit(throttle_PIN , 1);
 //!    delay_us(10);
 //!      tick =1;
    tick_count++;
    if(tick_count >= 8)
    {
-         output_bit(throttle_PIN , 1);
-         raw_adc = read_adc();
-         raw_adc = raw_adc >> 2;
-         throttle_level = raw_adc;  
-         if (throttle_level > 255)
-         {
-            throttle_level = 255;
-         }
-         if (throttle_level < 0)
-         {
-            throttle_level = 0;
-         }
-         freq = throttle_level - 5 ;
-         peak_voltage = gain_table[throttle_level];
-         setup_timer1(TMR_INTERNAL | TMR_DIV_BY_64 , timer_table[freq]);
-         output_bit(throttle_PIN , 0);
-         
-//!         tick = 1;
-         tick_count=0;
+      output_bit(throttle_PIN , 1);
+      tick = 1;
+      tick_count=0;
    
    }
-//!
+
 //!   output_bit(throttle_PIN , 0);
 }
 #INT_TIMER1
@@ -283,22 +266,22 @@ void main()
    if(tick)
       {
  //        tick=0;
-//!         raw_adc = read_adc();
-//!         raw_adc = raw_adc >> 2;
-//!         throttle_level = raw_adc;  
-//!         if (throttle_level > 255)
-//!         {
-//!            throttle_level = 255;
-//!         }
-//!         if (throttle_level < 0)
-//!         {
-//!            throttle_level = 0;
-//!         }
-//!         freq = throttle_level - 5 ;
-//!         peak_voltage = gain_table[throttle_level];
-//!         setup_timer1(TMR_INTERNAL | TMR_DIV_BY_64 , timer_table[freq]);
-//!         output_bit(throttle_PIN , 0);
-//!         tick = 0;
+         raw_adc = read_adc();
+         raw_adc = raw_adc >> 2;
+         throttle_level = raw_adc;  
+         if (throttle_level > 255)
+         {
+            throttle_level = 255;
+         }
+         if (throttle_level < 0)
+         {
+            throttle_level = 0;
+         }
+         freq = throttle_level - 5 ;
+         peak_voltage = gain_table[throttle_level];
+         setup_timer1(TMR_INTERNAL | TMR_DIV_BY_64 , timer_table[freq]);
+         output_bit(throttle_PIN , 0);
+         tick = 0;
          
          //putc(1,49);
       }   

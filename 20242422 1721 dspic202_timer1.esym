@@ -1,9 +1,9 @@
-D G "__PCD__" 0 346 ""5.112""
-D G "__DEVICE__" 0 346 "2202"
-D G "__DATE__" 0 346 ""23-Apr-24""
-D G "__TIME__" 0 346 ""14:02:04""
-D G "_UNICODE" 0 346 ""?""
-D G "__EVAL" 0 346 ""?"" "!#include <pwm_3.h>"
+D G "__PCD__" 0 366 ""5.112""
+D G "__DEVICE__" 0 366 "2202"
+D G "__DATE__" 0 366 ""24-Apr-24""
+D G "__TIME__" 0 366 ""09:39:46""
+D G "_UNICODE" 0 366 ""?""
+D G "__EVAL" 0 366 ""?"" "!#include <pwm_3.h>"
 c L "set_tris_a" 1 1 20 "FUNCTION"
 F N "set_tris_a" 1 61 ""
 V L "value" 1 61 "int16" `55 
@@ -1938,13 +1938,13 @@ V G "tick" 0 60 "int1" `1209
 V G "peak_voltage" 0 61 "sint16" `1210 
 V G "max_freq" 0 62 "int16" `1211 
 V G "per_clock_tick" 0 63 "?" `1213 
-V G "timer_table" 0 64 "int16[250]" `1215 
+V G "timer_table" 0 64 "int16[251]" `1215 
 V G "gain_table" 0 65 "int16[256]" `1216 
 V G "raw_adc" 0 66 "int16" `1217 
 V G "throttle_level" 0 67 "sint16" `1218 
 V G "freq" 0 68 "int16" `1219 
 V G "temp" 0 69 "int16" `1220 
-V G "tick_count" 0 71 "int1" `1221 
+V G "tick_count" 0 71 "sint8" `1221 
 F N "timer_reload" 0 73 ""
 f G "timer_reload" 0 73 "void()" `1222 
 F N "voltage_gain" 0 74 ""
@@ -1964,20 +1964,22 @@ F G "EXT0_isr" 0 105 "void()" `1227
 F N "timer2_isr" 0 109 ""
 F G "timer2_isr" 0 110 "void()" `1228 
 F N "PWM1_isr" 0 116 ""
-F G "PWM1_isr" 0 117 "void()" `1229 
-C L "PWM1_isr" 0 29 7 "FUNCTION"
-F N "timer1_isr" 0 132 ""
-F G "timer1_isr" 0 133 "void()" `1230  "!   output_toggle(TOGGLE_PIN);"
+F G "PWM1_isr" 0 117 "void()" `1229  "!    output_bit(throttle_PIN , 1);"
+C L "PWM1_isr" 0 29 2 "FUNCTION"
+C L "PWM1_isr" 0 29 1 "FUNCTION"
+C L "PWM1_isr" 0 29 1 "FUNCTION"
+F N "timer1_isr" 0 150 ""
+F G "timer1_isr" 0 151 "void()" `1230  "!   output_toggle(TOGGLE_PIN);"
 C L "timer1_isr" 0 29 1 "FUNCTION"
-V L "i" 0 143 "sint16" `1231 
+V L "i" 0 161 "sint16" `1231 
 C L "timer1_isr" 0 29 2 "FUNCTION"
 C L "timer1_isr" 0 29 4 "FUNCTION"
-F N "initMCPWM" 0 190 ""
-f G "initMCPWM" 0 190 "void()" `1235 
-F N "fill_sine_table" 0 191 ""
-f G "fill_sine_table" 0 191 "void()" `1236 
-F N "MAIN" 0 192 ""
-F G "MAIN" 0 193 "void()" `1237 
+F N "initMCPWM" 0 208 ""
+f G "initMCPWM" 0 208 "void()" `1235 
+F N "fill_sine_table" 0 209 ""
+f G "fill_sine_table" 0 209 "void()" `1236 
+F N "MAIN" 0 210 ""
+F G "MAIN" 0 211 "void()" `1237 
 C L "MAIN" 0 29 13 "FUNCTION"
 C L "MAIN" 0 29 2 "FUNCTION"
 C L "MAIN" 0 29 2 "FUNCTION"
@@ -1989,25 +1991,25 @@ C L "MAIN" 0 29 1 "FUNCTION"
 C L "MAIN" 0 29 2 "FUNCTION"
 C L "MAIN" 0 29 1 "FUNCTION"
 C L "MAIN" 0 29 1 "FUNCTION"
-C L "MAIN" 0 29 1 "FUNCTION"
-C L "MAIN" 0 29 1 "FUNCTION"
-F N "initMCPWM" 0 287 ""
-F G "initMCPWM" 0 288 "void()" `1235 
-C L "initMCPWM" 0 290 1 "*"
-C L "initMCPWM" 0 290 1 "FUNCTION"
-C L "initMCPWM" 0 290 1 "FUNCTION"
-C L "initMCPWM" 0 290 1 "FUNCTION"
-F N "fill_sine_table" 0 305 ""
-F G "fill_sine_table" 0 306 "void()" `1236 
-F N "timer_reload" 0 314 ""
-F G "timer_reload" 0 315 "void()" `1222 
-V L "intr_per_sample" 0 316 "?" `1240 
-V L "sample" 0 318 "sint16" `1241 
-F N "voltage_gain" 0 326 ""
-F G "voltage_gain" 0 327 "void()" `1223 
-V L "i" 0 328 "sint16" `1242 
-V L "i" 0 332 "sint16" `1243 
-V L "i" 0 340 "sint16" `1244 
+C L "MAIN" 0 29 2 "FUNCTION"
+C L "MAIN" 0 29 18 "FUNCTION"
+F N "initMCPWM" 0 307 ""
+F G "initMCPWM" 0 308 "void()" `1235 
+C L "initMCPWM" 0 310 1 "*"
+C L "initMCPWM" 0 310 1 "FUNCTION"
+C L "initMCPWM" 0 310 1 "FUNCTION"
+C L "initMCPWM" 0 310 1 "FUNCTION"
+F N "fill_sine_table" 0 325 ""
+F G "fill_sine_table" 0 326 "void()" `1236 
+F N "timer_reload" 0 334 ""
+F G "timer_reload" 0 335 "void()" `1222 
+V L "intr_per_sample" 0 336 "?" `1240 
+V L "sample" 0 338 "sint16" `1241 
+F N "voltage_gain" 0 346 ""
+F G "voltage_gain" 0 347 "void()" `1223 
+V L "i" 0 348 "sint16" `1242 
+V L "i" 0 352 "sint16" `1243 
+V L "i" 0 360 "sint16" `1244 
 F B "reset_cpu" 0 0
 F B "abs" 1 0
 F B "sleep" 0 1

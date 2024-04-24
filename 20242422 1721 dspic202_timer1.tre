@@ -1,5 +1,5 @@
 ÀÄ20242422 1721 dspic202_timer1
-   ÃÄMAIN  0/490  Ram=0
+   ÃÄMAIN  0/400  Ram=0
    ³  ÃÄ@cinit1  (Inline)  Ram=0
    ³  ÃÄ@cinit2  (Inline)  Ram=0
    ³  ÃÄtimer_reload  0/208  Ram=10
@@ -45,6 +45,6 @@
    ÃÄUART1E_isr  0/32  Ram=0
    ÃÄEXT0_isr  0/32  Ram=0
    ÃÄtimer2_isr  0/34  Ram=0
-   ÃÄPWM1_isr  0/40  Ram=0
+   ÃÄPWM1_isr  0/124  Ram=0
    ÀÄtimer1_isr  0/526  Ram=2
       ÀÄ@MULS3232  0/66  Ram=1
